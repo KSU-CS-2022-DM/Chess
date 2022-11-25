@@ -17,16 +17,21 @@ def main():
         with open(i, 'r') as pgn:
             # Gets year from ficsgamesdb filename
             year = i[12:16:1]
-            cgf = open('cleaned_games_' + year + '.pgn', 'a')
+            black_wins = open('cleaned_games_' + year + '_black_wins.pgn', 'a')
+            white_wins = open('cleaned_games_' + year + '_white_wins.pgn', 'a')
 
             game = chess.pgn.read_game(pgn)
             while game != None:
                 gamestr = str(game.mainline_moves())
                 if 'checkmated' in gamestr or 'resigns' in gamestr:
-                    print(gamestr, file=cgf, end='\n\n')
+                    if 'White' in gamestr:
+                        print(gamestr, file=black_wins, end='\n\n')
+                    else:
+                        print(gamestr, file=white_wins, end='\n\n')
                 game = chess.pgn.read_game(pgn)
 
-            cgf.close()
+            black_wins.close()
+            white_wins.close()
 
 
 if __name__ == '__main__':
