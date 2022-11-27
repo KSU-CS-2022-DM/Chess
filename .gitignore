@@ -1,7 +1,7 @@
 *.pgn
 *.csv
 *.meta
-*.pbtxt
+
 
 test/
 model/
